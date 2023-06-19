@@ -178,7 +178,8 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        _launchURL(Uri.parse(whatsAppLink));
+                        // _launchURL(Uri.parse(whatsAppLink));
+                        launch('https://wa.me/9433990099');
                       },
                       child: Container(
                         decoration: BoxDecoration(
@@ -222,7 +223,9 @@ class _HomePageState extends State<HomePage> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        _launchURL(Uri.parse(whatsAppLink));
+                        // _launchURL(Uri.parse(fbLink));
+                        // launchUrl(Uri.parse(whatsAppLink));
+                        launch('https://wa.me/8240607226');
                       },
                       child: Container(
                         decoration: BoxDecoration(
@@ -263,50 +266,46 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                     ),
-                    Link(
-                      uri: Uri.parse(whatsAppLink),
-                      target: LinkTarget.defaultTarget,
-                      builder: (context, followLink) => GestureDetector(
-                        onTap: () {
-                          _launchURL(Uri.parse(whatsAppLink));
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10.r),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.5),
-                                spreadRadius: 2,
-                                blurRadius: 5,
-                                offset: const Offset(
-                                    0, 3), // changes the position of the shadow
-                              ),
-                            ],
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 15.w, vertical: 20.h),
-                            child: Row(
-                              children: [
-                                const CircleAvatar(
-                                  backgroundColor:
-                                      Color.fromARGB(255, 7, 67, 116),
-                                  foregroundImage:
-                                      AssetImage("assets/icons/sound.png"),
-                                ),
-                                SizedBox(
-                                  width: 15.w,
-                                ),
-                                Text(
-                                  "মনের  কথা",
-                                  style: GoogleFonts.poppins(
-                                      fontSize: 22.sp,
-                                      fontWeight: FontWeight.w700,
-                                      color: Colors.blue),
-                                )
-                              ],
+                    GestureDetector(
+                      onTap: () {
+                        launch('https://wa.me/8240607226');
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10.r),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 2,
+                              blurRadius: 5,
+                              offset: const Offset(
+                                  0, 3), // changes the position of the shadow
                             ),
+                          ],
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 15.w, vertical: 20.h),
+                          child: Row(
+                            children: [
+                              const CircleAvatar(
+                                backgroundColor:
+                                    Color.fromARGB(255, 7, 67, 116),
+                                foregroundImage:
+                                    AssetImage("assets/icons/sound.png"),
+                              ),
+                              SizedBox(
+                                width: 15.w,
+                              ),
+                              Text(
+                                "মনের  কথা",
+                                style: GoogleFonts.poppins(
+                                    fontSize: 22.sp,
+                                    fontWeight: FontWeight.w700,
+                                    color: Colors.blue),
+                              )
+                            ],
                           ),
                         ),
                       ),
@@ -360,8 +359,9 @@ class _HomePageState extends State<HomePage> {
             ),
             GestureDetector(
               onTap: () {
-                launchUrl(Uri.parse(whatsAppLink),
-                    mode: LaunchMode.inAppWebView);
+                // launchUrl(Uri.parse(whatsAppLink),
+                //     mode: LaunchMode.inAppWebView);
+                launch('https://wa.me/8240607226');
               },
               child: Image.asset(
                 "assets/icons/Whatsapp.png",
