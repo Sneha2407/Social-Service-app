@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -25,7 +25,9 @@ class _HomePageState extends State<HomePage> {
       fbLink: '',
       instaLink: '',
       wpSendMsgLink: '',
-      logo: '');
+      logo: '',
+      contact: '',
+      about: '');
   @override
   void initState() {
     // TODO: implement initState
@@ -78,7 +80,6 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     String fbLink = data.fbLink;
     String instaLink = data.instaLink;
-    String whatsAppLink = data.wpSendMsgLink;
     String logo = data.logo;
 
     return Scaffold(
@@ -108,6 +109,25 @@ class _HomePageState extends State<HomePage> {
                       );
                     },
                   ),
+                  actions: [
+                    InkWell(
+                        onTap: () async {
+                          const phoneNumber = 'tel:8240607226';
+                          if (await canLaunch(phoneNumber)) {
+                            await launch(phoneNumber);
+                          } else {
+                            throw 'Could not launch $phoneNumber';
+                          }
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Image.asset(
+                            "assets/icons/call .png",
+                            height: 30.h,
+                            width: 30.w,
+                          ),
+                        ))
+                  ],
                   backgroundColor: Colors.white,
                   centerTitle: true,
                   title: logo == ''
@@ -130,42 +150,58 @@ class _HomePageState extends State<HomePage> {
             SizedBox(
               height: 170.h,
               child: FutureBuilder<List<String>>(
-                  future: pictureListFuture,
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      final pictureList = snapshot.data!;
-                      return ListView.builder(
-                          itemCount: pictureList.length,
-                          scrollDirection: Axis.horizontal,
-                          shrinkWrap: true,
-                          itemBuilder: (context, index) {
-                            return Padding(
-                              padding: EdgeInsets.only(right: 10.w),
-                              child: Container(
-                                height: 170.h,
-                                width: 300.w,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                      image: NetworkImage(pictureList[index]),
-                                      fit: BoxFit.cover),
-                                  borderRadius: BorderRadius.circular(10.r),
-                                ),
+                future: pictureListFuture,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    final pictureList = snapshot.data!;
+                    return CarouselSlider.builder(
+                      itemCount: pictureList.length,
+                      itemBuilder:
+                          (BuildContext context, int index, int realIndex) {
+                        return Padding(
+                          padding: EdgeInsets.only(right: 5.w),
+                          child: Container(
+                            height: 170.h,
+                            width: 300.w,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: NetworkImage(pictureList[index]),
+                                fit: BoxFit.cover,
                               ),
-                            );
-                          });
-                    } else if (snapshot.hasError) {
-                      return Center(
-                        child: Text('Error: ${snapshot.error}'),
-                      );
-                    } else {
-                      return Center(
-                        child: CircularProgressIndicator(
-                          color: Colors.black,
-                          strokeWidth: 2.w,
-                        ),
-                      );
-                    }
-                  }),
+                              borderRadius: BorderRadius.circular(10.r),
+                            ),
+                          ),
+                        );
+                      },
+                      options: CarouselOptions(
+                        height: 170.h,
+                        aspectRatio: 16 / 9,
+                        viewportFraction: 0.8,
+                        initialPage: 0,
+                        enableInfiniteScroll: true,
+                        reverse: false,
+                        autoPlay: true,
+                        autoPlayInterval: Duration(seconds: 3),
+                        autoPlayAnimationDuration: Duration(milliseconds: 800),
+                        autoPlayCurve: Curves.fastOutSlowIn,
+                        enlargeCenterPage: true,
+                        scrollDirection: Axis.horizontal,
+                      ),
+                    );
+                  } else if (snapshot.hasError) {
+                    return Center(
+                      child: Text('Error: ${snapshot.error}'),
+                    );
+                  } else {
+                    return Center(
+                      child: CircularProgressIndicator(
+                        color: Colors.black,
+                        strokeWidth: 2.w,
+                      ),
+                    );
+                  }
+                },
+              ),
             ),
             SizedBox(
               height: 20.h,
@@ -210,7 +246,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                               Text(
                                 "স্বাস্থ্য  পরিষেবা",
-                                style: GoogleFonts.poppins(
+                                style: GoogleFonts.notoSerifBengali(
                                   fontSize: 22.sp,
                                   fontWeight: FontWeight.w700,
                                   color: Color.fromARGB(255, 191, 45, 35),
@@ -256,7 +292,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                               Text(
                                 "বাজার  সামগ্রী",
-                                style: GoogleFonts.poppins(
+                                style: GoogleFonts.notoSerifBengali(
                                     fontSize: 22.sp,
                                     fontWeight: FontWeight.w700,
                                     color: Colors.purple),
@@ -300,7 +336,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                               Text(
                                 "মনের  কথা",
-                                style: GoogleFonts.poppins(
+                                style: GoogleFonts.notoSerifBengali(
                                     fontSize: 22.sp,
                                     fontWeight: FontWeight.w700,
                                     color: Colors.blue),
@@ -328,11 +364,6 @@ class _HomePageState extends State<HomePage> {
           padding: EdgeInsets.symmetric(horizontal: 20.w),
           child:
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            const Icon(
-              Icons.notifications_rounded,
-              color: Colors.grey,
-              size: 30,
-            ),
             Link(
               uri: Uri.parse(instaLink),
               target: LinkTarget.defaultTarget,
@@ -363,10 +394,12 @@ class _HomePageState extends State<HomePage> {
                 //     mode: LaunchMode.inAppWebView);
                 launch('https://wa.me/8240607226');
               },
-              child: Image.asset(
-                "assets/icons/Whatsapp.png",
-                height: 35.h,
-                width: 35.w,
+              child: Text(
+                "+91 8240507226",
+                style: GoogleFonts.poppins(
+                    fontSize: 18.sp,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black),
               ),
             ),
           ]),

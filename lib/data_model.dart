@@ -12,26 +12,30 @@ class Data {
   String instaLink;
   String wpSendMsgLink;
   String logo;
+  String about;
+  String contact;
 
-  Data({
-    required this.phoneNumber,
-    required this.pic,
-    required this.address,
-    required this.fbLink,
-    required this.instaLink,
-    required this.wpSendMsgLink,
-    required this.logo,
-  });
+  Data(
+      {required this.phoneNumber,
+      required this.pic,
+      required this.address,
+      required this.fbLink,
+      required this.instaLink,
+      required this.wpSendMsgLink,
+      required this.logo,
+      required this.about,
+      required this.contact});
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
-        phoneNumber: json["phoneNumber"],
-        pic: List<String>.from(json["pic"].map((x) => x)),
-        address: json["address"],
-        fbLink: json["fbLink"],
-        instaLink: json["instaLink"],
-        wpSendMsgLink: json["wpSendMsgLink"],
-        logo: json["logo"],
-      );
+      phoneNumber: json["phoneNumber"],
+      pic: List<String>.from(json["pic"].map((x) => x)),
+      address: json["address"],
+      fbLink: json["fbLink"],
+      instaLink: json["instaLink"],
+      wpSendMsgLink: json["wpSendMsgLink"],
+      logo: json["logo"],
+      contact: json["contact"],
+      about: json["about"]);
 
   Map<String, dynamic> toJson() => {
         "phoneNumber": phoneNumber,
@@ -41,5 +45,7 @@ class Data {
         "instaLink": instaLink,
         "wpSendMsgLink": wpSendMsgLink,
         "logo": logo,
+        "contact": contact,
+        "about": about
       };
 }

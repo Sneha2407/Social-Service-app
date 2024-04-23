@@ -43,7 +43,9 @@ class _MenuPageState extends State<MenuPage> {
       fbLink: '',
       instaLink: '',
       wpSendMsgLink: '',
-      logo: '');
+      logo: '',
+      about: '',
+      contact: '');
   @override
   void initState() {
     // TODO: implement initState
@@ -72,112 +74,134 @@ class _MenuPageState extends State<MenuPage> {
 
   @override
   Widget build(BuildContext context) {
-    String phNo = data.phoneNumber;
-    String address = data.address;
     String logo = data.logo;
+    String contact = data.contact;
+    String about = data.about;
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SizedBox(
-            height: 30.h,
-          ),
-          Align(
-            alignment: Alignment.topRight,
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15.w),
-              child: IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: Image.asset(
-                  "assets/icons/close_circle.png",
-                  height: 40.h,
-                  width: 40.w,
-                ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 15.w),
+          child: Column(
+            // crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              // SizedBox(
+              //   height: 30.h,
+              // ),
+              // Align(
+              //   alignment: Alignment.topRight,
+              //   child: Padding(
+              //     padding: EdgeInsets.symmetric(horizontal: 15.w),
+              //     child: IconButton(
+              //       onPressed: () {
+              //         Navigator.pop(context);
+              //       },
+              //       icon: Image.asset(
+              //         "assets/icons/close_circle.png",
+              //         height: 40.h,
+              //         width: 40.w,
+              //       ),
+              //     ),
+              //   ),
+              // ),
+              SizedBox(
+                height: 30.h,
               ),
-            ),
+              logo == ''
+                  ? Container(
+                      color: Colors.white,
+                    )
+                  : CircleAvatar(
+                      backgroundColor: Color(0xfff0e43e),
+                      backgroundImage: NetworkImage(logo),
+                      radius: 70.r,
+                    ),
+              SizedBox(
+                height: 10.h,
+              ),
+              Text(
+                "আমাদের সম্পর্কে",
+                textAlign: TextAlign.center,
+                style: GoogleFonts.notoSerifBengali(
+                    fontSize: 24.sp,
+                    fontWeight: FontWeight.w800,
+                    color: const Color.fromARGB(255, 133, 25, 17)),
+              ),
+              SizedBox(
+                height: 10.h,
+              ),
+              Text(
+                about,
+                textAlign: TextAlign.center,
+                style: GoogleFonts.notoSerifBengali(
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black),
+              ),
+              SizedBox(
+                height: 20.h,
+              ),
+              Text(
+                "যোগাযোগ",
+                style: GoogleFonts.notoSerifBengali(
+                    fontSize: 24.sp,
+                    fontWeight: FontWeight.w800,
+                    color: const Color.fromARGB(255, 133, 25, 17)),
+              ),
+
+              Text(
+                contact,
+                textAlign: TextAlign.center,
+                style: GoogleFonts.notoSerifBengali(
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.black),
+              ),
+              // Text(
+              //   "support@sathi.app",
+              //   style: GoogleFonts.poppins(
+              //       fontSize: 16.sp,
+              //       fontWeight: FontWeight.w600,
+              //       color: Colors.black),
+              // ),
+              // SizedBox(
+              //   height: 30.h,
+              // ),
+              // Text(
+              //   "ঠিকানা",
+              //   style: GoogleFonts.poppins(
+              //       fontSize: 20.sp,
+              //       fontWeight: FontWeight.w600,
+              //       color: Colors.black),
+              // ),
+              // SizedBox(
+              //   height: 10.h,
+              // ),
+              // Padding(
+              //   padding: EdgeInsets.symmetric(horizontal: 50.w),
+              //   child: Text(
+              //     address,
+              //     maxLines: 4,
+              //     textAlign: TextAlign.center,
+              //     style: GoogleFonts.poppins(
+              //         fontSize: 16.sp,
+              //         fontWeight: FontWeight.w600,
+              //         color: Colors.black),
+              //   ),
+              // ),
+              SizedBox(
+                height: 30.h,
+              ),
+              Text(
+                "© সাথী 2023, all rights reserved",
+                style: GoogleFonts.notoSerifBengali(
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.w400,
+                    color: const Color.fromARGB(255, 133, 25, 17)),
+              ),
+            ],
           ),
-          SizedBox(
-            height: 30.h,
-          ),
-          logo == ''
-              ? Container(
-                  color: Colors.white,
-                )
-              : CircleAvatar(
-                  backgroundColor: Colors.black,
-                  backgroundImage: NetworkImage(logo),
-                  radius: 70.r,
-                ),
-          SizedBox(
-            height: 20.h,
-          ),
-          SizedBox(
-            height: 30.h,
-          ),
-          Text(
-            "যোগাযোগ",
-            style: GoogleFonts.poppins(
-                fontSize: 20.sp,
-                fontWeight: FontWeight.w600,
-                color: Colors.black),
-          ),
-          SizedBox(
-            height: 10.h,
-          ),
-          Text(
-            phNo,
-            style: GoogleFonts.poppins(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.w600,
-                color: Colors.black),
-          ),
-          Text(
-            "support@sathi.app",
-            style: GoogleFonts.poppins(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.w600,
-                color: Colors.black),
-          ),
-          SizedBox(
-            height: 30.h,
-          ),
-          Text(
-            "ঠিকানা",
-            style: GoogleFonts.poppins(
-                fontSize: 20.sp,
-                fontWeight: FontWeight.w600,
-                color: Colors.black),
-          ),
-          SizedBox(
-            height: 10.h,
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 50.w),
-            child: Text(
-              address,
-              maxLines: 4,
-              textAlign: TextAlign.center,
-              style: GoogleFonts.poppins(
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.black),
-            ),
-          ),
-          Spacer(),
-          Text(
-            "© সাথী 2023, all rights reserved",
-            style: GoogleFonts.poppins(
-                fontSize: 12.sp,
-                fontWeight: FontWeight.w400,
-                color: Colors.grey),
-          ),
-          SizedBox(
-            height: 20.h,
-          ),
-        ],
+        ),
       ),
     );
   }
